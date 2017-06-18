@@ -9,7 +9,7 @@ $path_of_uploaded_file = $upload_folder;
 $max_allowed_file_size = 50;
 
 $website = 'sprintylab.com';
-$send_to = 'lakshangamage.13@cse.mrt.ac.lk';
+$send_to = 'support@sprintylab.com';
 $from = 'order';
 
 $full_path = '/home/sprintyl/public_html/mailer';
@@ -18,6 +18,7 @@ $send_log = false;
 error_reporting(E_ALL);
 
 $response = file_get_contents('success_response.html');
+
 //tweeter config
 
 
@@ -45,6 +46,7 @@ function send_attachment($file, $file_is_order = true)
     //$email->Body = $body;
     $email->MsgHTML(getEmailHTML());
     $email->AddAddress($send_to);
+    $email->AddAddress('sprintylab@gmail.com');
 
     $file_to_attach = $path_of_uploaded_file;
 
@@ -179,6 +181,11 @@ function getEmailHTML()
     }
     $message = str_replace('%color_type%', $color_type, $message);
     $message = str_replace('%paper_size%', $_POST['paper_size'], $message);
+    $paper_side="No";
+    if ($_POST['paper_side'] == "yes") {
+        $paper_side = "Yes";
+    }
+    $message = str_replace('%paper_side%', $paper_side, $message);
     $pages="All";
     if ($_POST['page_to_print'] == "one_page") {
         $pages =  "Pages: ".$_POST['page_number_single'];
@@ -200,11 +207,14 @@ function getEmailHTML()
     $pages_per_sheet .= $_POST['landscape_or_portrait'].'/';
     $pages_per_sheet .= $_POST['pages_per_sheet'];
     $message = str_replace('%pages_per_sheet%', $pages_per_sheet, $message);
+    $message = str_replace('%additional_information%', $_POST['additional_information'], $message);
     return $message;
 }
 
 function sendError($msg)
 {
+    $response = file_get_contents('error_response.html');
+    echo $response;
     die($msg);
 }
 
@@ -222,7 +232,7 @@ if (isset($_POST['submit'])) {
         || empty($_POST['no_of_copies']) || empty($_POST['gray_or_color'])
         || empty($_POST['paper_size']) || empty($_POST['page_to_print'])
         || empty($_POST['word_or_presentation']) || empty($_POST['landscape_or_portrait'])
-        || empty($_POST['pages_per_sheet'])
+        || empty($_POST['pages_per_sheet']) || empty($_POST['paper_side']) || empty($_POST['additional_information'])
     ) {
         $errors .= "\n Name and Email are required fields. ";
     }
