@@ -1,6 +1,7 @@
 <?php
 require_once('tweeter/twitter.class.php');
 require_once('class.phpmailer.php');
+include_once("analytics/analyticstracking.php");
 
 date_default_timezone_set('Asia/Colombo');
 $order_time = date('jS M Y \a\t g:ia');
