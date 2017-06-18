@@ -1,5 +1,8 @@
 <?php
+require_once('tweeter/Twitter.php');
 require_once('class.phpmailer.php');
+
+$order_time = date('jS M Y \a\t g:ia');
 
 $upload_folder = './uploads/';
 $path_of_uploaded_file = $upload_folder;
@@ -15,6 +18,7 @@ $send_log = false;
 error_reporting(E_ALL);
 
 $response = file_get_contents('success_response.html');
+//tweeter config
 
 
 function date_stamp()
@@ -26,7 +30,9 @@ function date_stamp()
 
 function send_attachment($file, $file_is_order = true)
 {
-    global $send_to, $from, $website, $delete_backup, $path_of_uploaded_file;
+    global $send_to, $from, $website, $delete_backup, $path_of_uploaded_file
+           ,$accessToken, $accessTokenSecret, $consumerKey, $consumerSecret
+           , $order_time;
 
     $sent = 'No';
     $subject = '[SPRINTY] New ' . ($file_is_order ? 'Order:' : 'log report:') . date_stamp();
@@ -48,6 +54,12 @@ function send_attachment($file, $file_is_order = true)
     if ($email->Send()) {
         $sent = 'Yes';
         //echo ($file_is_order ? 'New Order' : 'Log Report') . ' sent to ' . $send_to . '.<br />';
+
+        $twitter = new Twitter($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+        $tweet = 'New Order: From '.$_POST['name'].' on '.$order_time;
+        if ($twitter->authenticate()) {
+            $twitter->send(utf8_encode($tweet));
+        }
         if ($file_is_order) {
             if ($delete_backup) {
                 unlink($file);
@@ -151,10 +163,12 @@ function IsInjected($str)
 
 function getEmailHTML()
 {
-    global $name_of_uploaded_file;
+
+    global $name_of_uploaded_file, $order_time;
+    $order_time = date('jS M Y \a\t g:ia');
     $pages_per_sheet = "word/";
     $message = file_get_contents('order_template.html');
-    $message = str_replace('%Date%', date('jS M Y \a\t g:ia'), $message);
+    $message = str_replace('%Date%', $order_time, $message);
     $message = str_replace('%name%', $_POST['name'], $message);
     $message = str_replace('%mobile%', $_POST['mobile'], $message);
     $message = str_replace('%file_name%', $name_of_uploaded_file, $message);
