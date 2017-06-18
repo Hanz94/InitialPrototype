@@ -1,5 +1,5 @@
 <?php
-require_once('tweeter/Twitter.php');
+require_once('tweeter/twitter.class.php');
 require_once('class.phpmailer.php');
 
 $order_time = date('jS M Y \a\t g:ia');
@@ -207,7 +207,11 @@ function getEmailHTML()
     $pages_per_sheet .= $_POST['landscape_or_portrait'].'/';
     $pages_per_sheet .= $_POST['pages_per_sheet'];
     $message = str_replace('%pages_per_sheet%', $pages_per_sheet, $message);
-    $message = str_replace('%additional_information%', $_POST['additional_information'], $message);
+    $add_info = 'None';
+    if (!empty($_POST['additional_information'])){
+        $add_info = $_POST['additional_information'];
+    }
+    $message = str_replace('%additional_information%', $add_info, $message);
     return $message;
 }
 
@@ -232,7 +236,7 @@ if (isset($_POST['submit'])) {
         || empty($_POST['no_of_copies']) || empty($_POST['gray_or_color'])
         || empty($_POST['paper_size']) || empty($_POST['page_to_print'])
         || empty($_POST['word_or_presentation']) || empty($_POST['landscape_or_portrait'])
-        || empty($_POST['pages_per_sheet']) || empty($_POST['paper_side']) || empty($_POST['additional_information'])
+        || empty($_POST['pages_per_sheet']) || empty($_POST['paper_side'])
     ) {
         $errors .= "\n Name and Email are required fields. ";
     }
