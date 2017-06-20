@@ -209,12 +209,12 @@ function getEmailHTML()
         $pages =  "From: ".$_POST['page_number_from']." To: ".$_POST['page_number_to'];
     }
     $message = str_replace('%pages%', $pages, $message);
-    $document_type="Word";
-    if ($_POST['word_or_presentation'] == "presentation") {
-        $document_type = "Presentation";
-        $pages_per_sheet = "ppt/";
-    }
-    $message = str_replace('%document_type%', $document_type, $message);
+//    $document_type="Word";
+//    if ($_POST['word_or_presentation'] == "presentation") {
+//        $document_type = "Presentation";
+//        $pages_per_sheet = "ppt/";
+//    }
+//    $message = str_replace('%document_type%', $document_type, $message);
     $orientation="Potrait";
     if ($_POST['landscape_or_portrait'] == "landscape") {
         $orientation = "Landscape";
@@ -431,7 +431,7 @@ function getSuccessResponse(){
     $message = str_replace('%paper_size%', $_POST['paper_size'], $message);
     $message = str_replace('%paper_side%', $paper_side, $message);
     $message = str_replace('%pages%', $pages, $message);
-    $message = str_replace('%document_type%', $document_type, $message);
+//    $message = str_replace('%document_type%', $document_type, $message);
     $message = str_replace('%orientation%', $orientation, $message);
     $message = str_replace('%pages_per_sheet%', $pages_per_sheet, $message);
     $message = str_replace('%additional_information%', $add_info, $message);
@@ -454,7 +454,7 @@ if (isset($_POST['submit'])) {
     if (empty($_POST['name']) || empty($_POST['mobile'])
         || empty($_POST['no_of_copies']) || empty($_POST['gray_or_color'])
         || empty($_POST['paper_size']) || empty($_POST['page_to_print'])
-        || empty($_POST['word_or_presentation']) || empty($_POST['landscape_or_portrait'])
+        || empty($_POST['landscape_or_portrait'])
         || empty($_POST['pages_per_sheet']) || empty($_POST['paper_side'])
     ) {
         $errors .= "\n All the required fields are not filled. ";
