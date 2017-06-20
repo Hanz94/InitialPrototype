@@ -1,4 +1,5 @@
 <?php
+require("../db/config.inc.php");
 require_once('tweeter/twitter.class.php');
 require_once('class.phpmailer.php');
 include_once("analytics/analyticstracking.php");
@@ -35,7 +36,7 @@ function send_attachment($file, $file_is_order = true)
 {
     global $send_to, $from, $website, $delete_backup, $path_of_uploaded_file
            ,$accessToken, $accessTokenSecret, $consumerKey, $consumerSecret
-           , $order_time, $total_files;
+           , $order_id, $total_files;
 
     $sent = 'No';
     $subject = '[SPRINTY] New ' . ($file_is_order ? 'Order:' : 'log report:') . date_stamp();
@@ -56,13 +57,12 @@ function send_attachment($file, $file_is_order = true)
         $email->AddAttachment($file_to_attach);
     }
 
-
     if ($email->Send()) {
         $sent = 'Yes';
         //echo ($file_is_order ? 'New Order' : 'Log Report') . ' sent to ' . $send_to . '.<br />';
 
         $twitter = new Twitter($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
-        $tweet = 'New Order: From '.$_POST['name'].' on '.$order_time;
+        $tweet = 'New Order: From '.$_POST['name']."\nID: ".$order_id;
         if ($twitter->authenticate()) {
             $twitter->send(utf8_encode($tweet));
         }
@@ -172,8 +172,9 @@ function IsInjected($str)
 
 function getEmailHTML()
 {
-
-    global $name_of_uploaded_file, $order_time, $total_files;
+    global $file_names,
+           $color_type, $paper_side, $pages, $document_type, $orientation,
+           $pages_per_sheet, $add_info, $name_of_uploaded_file, $order_time, $total_files;
     $order_time = date('jS M Y \a\t g:ia');
     $pages_per_sheet = "word/";
     $message = file_get_contents('order_template.html');
@@ -223,7 +224,184 @@ function getEmailHTML()
         $add_info = $_POST['additional_information'];
     }
     $message = str_replace('%additional_information%', $add_info, $message);
+
+    $message = str_replace('%order_id%', str_pad(saveOrder(), 4, '0', STR_PAD_LEFT), $message);
+
     return $message;
+}
+
+function saveOrder()
+{
+    global $errors, $db, $order_id;
+    $name = $_POST['name'];
+    $phone = $_POST['mobile'];
+    if (!checkCustomerExists($name, $phone)){
+        addNewCustomer($name, $phone);
+    }
+    $customer_id = getCustomerId($name, $phone);
+    $seller_id = '1';
+    $date = date('Y-m-d H:i:s');
+    $query = "INSERT INTO CustomerOrder 
+(customer_id, seller_id, date) 
+VALUES ( :customer_id, :seller_id, :date)";
+    //Again, we need to update our tokens with the actual data:
+    $query_params = array(
+        ':customer_id' => $customer_id,
+        ':seller_id' => $seller_id,
+        ':date' => $date
+    );
+
+    try {
+        $stmt   = $db->prepare($query);
+        $result	= $stmt->execute($query_params);
+    }
+    catch (PDOException $ex) {
+        $errors .= "Database Error1. Please Try Again!";
+        sendError($errors);
+    }
+    $order_id = $db->lastInsertId();
+    saveOrderFiles($order_id);
+    return $order_id;
+}
+
+function saveOrderFiles($order_id){
+    global $name_of_uploaded_file, $total_files,$file_names,
+           $color_type, $paper_side, $pages, $document_type, $orientation,
+           $pages_per_sheet, $add_info, $errors, $db;
+    $no_of_copies = $_POST['no_of_copies'];
+    $paper_size = $_POST['paper_size'];
+
+    $query = "INSERT INTO OrderFile 
+                (order_id, file_name, no_of_copies, color_type, paper_size, both_side, pages_to_print, orientation, additional_information ) 
+                VALUES ( :order_id, :file_name, :no_of_copies, :color_type, :paper_size, :both_side, :pages_to_print, :orientation, :additional_information)";
+    //Again, we need to update our tokens with the actual data:
+
+    for ($i=0; $i < $total_files; $i++){
+        $query_params = array(
+            ':order_id' => $order_id,
+            ':file_name' => $name_of_uploaded_file[$i],
+            ':no_of_copies' => $no_of_copies,
+            ':color_type' => $color_type,
+            ':paper_size' => $paper_size,
+            ':both_side' => $paper_side,
+            ':pages_to_print' => $pages,
+            ':orientation' => $orientation,
+            ':additional_information' => $add_info
+        );
+
+        try {
+            $stmt   = $db->prepare($query);
+            $result	= $stmt->execute($query_params);
+        }
+        catch (PDOException $ex) {
+            $errors .= "Database Error1. Please Try Again!";
+            sendError($errors);
+        }
+    }
+}
+
+function addNewCustomer($name, $phone){
+    global $errors, $db;
+    $query = "INSERT INTO Customer 
+(customer_name, phone) VALUES ( :cusname, :phone)";
+    //Again, we need to update our tokens with the actual data:
+    $query_params = array(
+        ':cusname' => $name,
+        ':phone' => $phone
+    );
+
+    try {
+        $stmt   = $db->prepare($query);
+        $result	= $stmt->execute($query_params);
+    }
+    catch (PDOException $ex) {
+        $errors .= "Database Error1. Please Try Again!";
+        sendError($errors);
+    }
+}
+
+function getCustomerId($name, $phone){
+    global $errors, $db;
+    $query = " 
+            SELECT *
+            FROM Customer 
+            WHERE 
+                customer_name= :username 
+                AND phone = :phone
+        ";
+
+    $query_params = array(
+        ':username' => $name,
+        ':phone' => $phone);
+
+    try {
+        $stmt   = $db->prepare($query);
+        $result = $stmt->execute($query_params);
+    }
+    catch (PDOException $ex) {
+
+        $errors .= "Database Error1. Please Try Again!";
+        sendError($errors);
+    }
+
+    $row = $stmt->fetch();
+    return $row['customer_id'];
+}
+
+function checkCustomerExists($name, $phone){
+    global $errors, $db;
+    $query = " 
+            SELECT *
+            FROM Customer 
+            WHERE 
+                customer_name= :username 
+                AND phone = :phone
+        ";
+
+    $query_params = array(
+        ':username' => $name,
+        ':phone' => $phone);
+
+    try {
+        $stmt   = $db->prepare($query);
+        $result = $stmt->execute($query_params);
+    }
+    catch (PDOException $ex) {
+
+        $errors .= "Database Error1. Please Try Again!";
+        sendError($errors);
+    }
+
+    $row = $stmt->fetch();
+    if ($row) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getSellerMail($seller_id){
+    global $errors, $db;
+    $query = " 
+            SELECT *
+            FROM Seller 
+            WHERE 
+                seller_id= :id 
+        ";
+
+    $query_params = array(
+        ':id' => $seller_id);
+
+    try {
+        $stmt   = $db->prepare($query);
+        $result = $stmt->execute($query_params);
+    }
+    catch (PDOException $ex) {
+        $errors .= "Database Error1. Please Try Again!";
+        sendError($errors);
+    }
+    $row = $stmt->fetch();
+    return $row['seller_email'];
 }
 
 function sendError($msg)
@@ -234,6 +412,7 @@ function sendError($msg)
     echo $response;
     die($msg);
 }
+
 
 if (isset($_POST['submit'])) {
     $total_files = count($_FILES['uploaded_file']['name']);
