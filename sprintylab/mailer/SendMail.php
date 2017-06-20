@@ -8,7 +8,7 @@ $order_time = date('jS M Y \a\t g:ia');
 
 $upload_folder = './uploads/';
 $path_of_uploaded_file = $upload_folder;
-$max_allowed_file_size = 50;
+$max_allowed_file_size = 25;
 
 $website = 'sprintylab.com';
 $send_to = 'support@sprintylab.com';
@@ -35,11 +35,11 @@ function send_attachment($file, $file_is_order = true)
 {
     global $send_to, $from, $website, $delete_backup, $path_of_uploaded_file
            ,$accessToken, $accessTokenSecret, $consumerKey, $consumerSecret
-           , $order_time;
+           , $order_time, $total_files;
 
     $sent = 'No';
     $subject = '[SPRINTY] New ' . ($file_is_order ? 'Order:' : 'log report:') . date_stamp();
-    $body = 'New Order File' . "\n" . ' - ' . $file . "\n\n";
+    //$body = 'New Order File' . "\n" . ' - ' . $file . "\n\n";
 
     $email = new PHPMailer();
     $email->From = $from . '@' . $website;
@@ -50,9 +50,11 @@ function send_attachment($file, $file_is_order = true)
     $email->AddAddress($send_to);
     $email->AddAddress('sprintylab@gmail.com');
 
-    $file_to_attach = $path_of_uploaded_file;
 
-    $email->AddAttachment($file_to_attach);
+    for($i=0; $i<$total_files; $i++) {
+        $file_to_attach = $path_of_uploaded_file[$i];
+        $email->AddAttachment($file_to_attach);
+    }
 
 
     if ($email->Send()) {
@@ -66,7 +68,10 @@ function send_attachment($file, $file_is_order = true)
         }
         if ($file_is_order) {
             if ($delete_backup) {
-                unlink($file);
+                for($i=0; $i<$total_files; $i++) {
+                    unlink($path_of_uploaded_file[$i]);
+                }
+                //unlink($file);
                 //echo 'Backup file REMOVED from disk.<br />';
             } else {
                 //echo 'Backup file LEFT on disk.<br />';
@@ -168,14 +173,18 @@ function IsInjected($str)
 function getEmailHTML()
 {
 
-    global $name_of_uploaded_file, $order_time;
+    global $name_of_uploaded_file, $order_time, $total_files;
     $order_time = date('jS M Y \a\t g:ia');
     $pages_per_sheet = "word/";
     $message = file_get_contents('order_template.html');
     $message = str_replace('%Date%', $order_time, $message);
     $message = str_replace('%name%', $_POST['name'], $message);
     $message = str_replace('%mobile%', $_POST['mobile'], $message);
-    $message = str_replace('%file_name%', $name_of_uploaded_file, $message);
+    $file_names = "";
+    for($i=0; $i<$total_files; $i++) {
+        $file_names .= $name_of_uploaded_file[$i].",\n";
+    }
+    $message = str_replace('%file_name%', $file_names, $message);
     $message = str_replace('%no_of_copies%', $_POST['no_of_copies'], $message);
     $color_type="Color";
     if ($_POST['gray_or_color'] == "gray_scale") {
@@ -219,19 +228,23 @@ function getEmailHTML()
 
 function sendError($msg)
 {
+    global $errors;
     $response = file_get_contents('error_response.html');
+    $response = str_replace('%error_txt%', $errors, $response);
     echo $response;
     die($msg);
 }
 
 if (isset($_POST['submit'])) {
-    $name_of_uploaded_file = basename($_FILES['uploaded_file']['name']);
+    $total_files = count($_FILES['uploaded_file']['name']);
 
-    //get the file extension of the file
-    $type_of_uploaded_file = substr($name_of_uploaded_file,
-        strrpos($name_of_uploaded_file, '.') + 1);
-
-    $size_of_uploaded_file = $_FILES["uploaded_file"]["size"] / (1024 * 1024);
+//    $name_of_uploaded_file = basename($_FILES['uploaded_file']['name']);
+//
+//    //get the file extension of the file
+//    $type_of_uploaded_file = substr($name_of_uploaded_file,
+//        strrpos($name_of_uploaded_file, '.') + 1);
+//
+//    $size_of_uploaded_file = $_FILES["uploaded_file"]["size"] / (1024 * 1024);
 
     ///------------Do Validations-------------
     if (empty($_POST['name']) || empty($_POST['mobile'])
@@ -240,14 +253,14 @@ if (isset($_POST['submit'])) {
         || empty($_POST['word_or_presentation']) || empty($_POST['landscape_or_portrait'])
         || empty($_POST['pages_per_sheet']) || empty($_POST['paper_side'])
     ) {
-        $errors .= "\n Name and Email are required fields. ";
+        $errors .= "\n All the required fields are not filled. ";
     }
     if (IsInjected($send_to)) {
         $errors .= "\n Bad email value!";
     }
-
+    $size_of_uploaded_file = array_sum($_FILES["uploaded_file"]["size"]) / (1024 * 1024);
     if ($size_of_uploaded_file > $max_allowed_file_size) {
-        $errors .= "\n Size of file should be less than $max_allowed_file_size";
+        $errors .= "\n Size of file should be less than "."$max_allowed_file_size"."MB";
     }
 
     //------ Validate the file extension -----
@@ -266,14 +279,34 @@ if (isset($_POST['submit'])) {
     //send the email
     if (empty($errors)) {
         //copy the temp. uploaded file to uploads folder
-        $path_of_uploaded_file = $upload_folder . $name_of_uploaded_file;
-        $tmp_path = $_FILES["uploaded_file"]["tmp_name"];
+        $path_of_uploaded_file = array();
+        $name_of_uploaded_file = array();
+        for($i=0; $i<$total_files; $i++) {
+            $tmp_path = $_FILES['uploaded_file']['tmp_name'][$i];
+            if ($tmp_path != ""){
+                //Setup our new file path
+                $newFilePath = $upload_folder. $_FILES['uploaded_file']['name'][$i];
 
-        if (is_uploaded_file($tmp_path)) {
-            if (!copy($tmp_path, $path_of_uploaded_file)) {
-                $errors .= '\n error while copying the uploaded file';
+                if (is_uploaded_file($tmp_path)) {
+                    if (!copy($tmp_path, $newFilePath)) {
+                        $errors .= '\n error while copying the uploaded file';
+                    }
+                }
+                array_push($path_of_uploaded_file,$newFilePath);
+                array_push($name_of_uploaded_file,$_FILES['uploaded_file']['name'][$i]);
+                //Upload the file into the temp dir
             }
         }
+
+
+        //$path_of_uploaded_file = $upload_folder . $name_of_uploaded_file;
+        //$tmp_path = $_FILES["uploaded_file"]["tmp_name"];
+
+//        if (is_uploaded_file($tmp_path)) {
+//            if (!copy($tmp_path, $path_of_uploaded_file)) {
+//                $errors .= '\n error while copying the uploaded file';
+//            }
+//        }
         if (empty($errors)) {
             $date_stamp = date_stamp();
             $order_filename = $path_of_uploaded_file;
