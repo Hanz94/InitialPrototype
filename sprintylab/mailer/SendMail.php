@@ -20,7 +20,7 @@ $delete_backup = true;
 $send_log = false;
 error_reporting(E_ALL);
 
-$response = file_get_contents('success_response.html');
+//$response = file_get_contents('success_response.html');
 
 //tweeter config
 
@@ -36,7 +36,7 @@ function send_attachment($file, $file_is_order = true)
 {
     global $send_to, $from, $website, $delete_backup, $path_of_uploaded_file
            ,$accessToken, $accessTokenSecret, $consumerKey, $consumerSecret
-           , $order_id, $total_files;
+           , $order_id, $total_files, $order_time;
 
     $sent = 'No';
     $subject = '[SPRINTY] New ' . ($file_is_order ? 'Order:' : 'log report:') . date_stamp();
@@ -62,9 +62,13 @@ function send_attachment($file, $file_is_order = true)
         //echo ($file_is_order ? 'New Order' : 'Log Report') . ' sent to ' . $send_to . '.<br />';
 
         $twitter = new Twitter($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
-        $tweet = 'New Order: From '.$_POST['name']."\nID: ".$order_id;
-        if ($twitter->authenticate()) {
-            $twitter->send(utf8_encode($tweet));
+        $tweet = "New Order:\nFrom ".$_POST['name']."\nOrder ID: ".str_pad($order_id, 4, '0', STR_PAD_LEFT)."\n".$order_time;
+        try {
+            if ($twitter->authenticate()) {
+                $twitter->send(utf8_encode($tweet));
+            }
+        } catch (TwitterException $ex){
+
         }
         if ($file_is_order) {
             if ($delete_backup) {
@@ -140,7 +144,7 @@ function write_log()
         } else {
             //echo 'yes<br />' . "\n";
         }
-        echo $response;
+        echo getSuccessResponse();
     }
 
     fclose($handle);
@@ -413,6 +417,27 @@ function sendError($msg)
     die($msg);
 }
 
+function getSuccessResponse(){
+    global $file_names,
+           $color_type, $paper_side, $pages, $document_type, $orientation,
+           $pages_per_sheet, $add_info, $name_of_uploaded_file, $order_time, $total_files, $order_id;
+    $message = file_get_contents('success_response.html');
+    $message = str_replace('%Date%', $order_time, $message);
+    $message = str_replace('%name%', $_POST['name'], $message);
+    $message = str_replace('%mobile%', $_POST['mobile'], $message);
+    $message = str_replace('%file_name%', $file_names, $message);
+    $message = str_replace('%no_of_copies%', $_POST['no_of_copies'], $message);
+    $message = str_replace('%color_type%', $color_type, $message);
+    $message = str_replace('%paper_size%', $_POST['paper_size'], $message);
+    $message = str_replace('%paper_side%', $paper_side, $message);
+    $message = str_replace('%pages%', $pages, $message);
+    $message = str_replace('%document_type%', $document_type, $message);
+    $message = str_replace('%orientation%', $orientation, $message);
+    $message = str_replace('%pages_per_sheet%', $pages_per_sheet, $message);
+    $message = str_replace('%additional_information%', $add_info, $message);
+    $message = str_replace('%order_id%', str_pad($order_id, 4, '0', STR_PAD_LEFT), $message);
+    return $message;
+}
 
 if (isset($_POST['submit'])) {
     $total_files = count($_FILES['uploaded_file']['name']);
