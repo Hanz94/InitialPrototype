@@ -144,6 +144,7 @@ function write_log()
         } else {
             //echo 'yes<br />' . "\n";
         }
+        unset($_POST);
         echo getSuccessResponse();
     }
 
@@ -180,7 +181,7 @@ function getEmailHTML()
            $color_type, $paper_side, $pages, $document_type, $orientation,
            $pages_per_sheet, $add_info, $name_of_uploaded_file, $order_time, $total_files;
     $order_time = date('jS M Y \a\t g:ia');
-    $pages_per_sheet = "word/";
+    //$pages_per_sheet = "word/";
     $message = file_get_contents('order_template.html');
     $message = str_replace('%Date%', $order_time, $message);
     $message = str_replace('%name%', $_POST['name'], $message);
@@ -260,7 +261,7 @@ VALUES ( :customer_id, :seller_id, :date)";
         $result	= $stmt->execute($query_params);
     }
     catch (PDOException $ex) {
-        $errors .= "Database Error1. Please Try Again!";
+        $errors .= "Error tracking order. Please Try Again!";
         sendError($errors);
     }
     $order_id = $db->lastInsertId();
@@ -298,7 +299,7 @@ function saveOrderFiles($order_id){
             $result	= $stmt->execute($query_params);
         }
         catch (PDOException $ex) {
-            $errors .= "Database Error1. Please Try Again!";
+            $errors .= "Error tracking files. Please Try Again!";
             sendError($errors);
         }
     }
@@ -319,7 +320,7 @@ function addNewCustomer($name, $phone){
         $result	= $stmt->execute($query_params);
     }
     catch (PDOException $ex) {
-        $errors .= "Database Error1. Please Try Again!";
+        $errors .= "Error handling customer. Please Try Again!";
         sendError($errors);
     }
 }
@@ -344,7 +345,7 @@ function getCustomerId($name, $phone){
     }
     catch (PDOException $ex) {
 
-        $errors .= "Database Error1. Please Try Again!";
+        $errors .= "Error retrieving customer identity. Please Try Again!";
         sendError($errors);
     }
 
@@ -372,7 +373,7 @@ function checkCustomerExists($name, $phone){
     }
     catch (PDOException $ex) {
 
-        $errors .= "Database Error1. Please Try Again!";
+        $errors .= "Error verifying customer. Please Try Again!";
         sendError($errors);
     }
 
@@ -401,7 +402,7 @@ function getSellerMail($seller_id){
         $result = $stmt->execute($query_params);
     }
     catch (PDOException $ex) {
-        $errors .= "Database Error1. Please Try Again!";
+        $errors .= "Error verifying seller. Please Try Again!";
         sendError($errors);
     }
     $row = $stmt->fetch();
@@ -539,7 +540,21 @@ if (isset($_POST['submit'])) {
     } else {
         sendError($errors);
     }
+} else {
+    header("../index.php");
 }
 
+$fn = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
+if ($fn) {
+
+    // AJAX call
+    file_put_contents(
+        'uploads/' . $fn,
+        file_get_contents('php://input')
+    );
+    echo "$fn uploaded";
+    exit();
+
+}
 
 ?>
