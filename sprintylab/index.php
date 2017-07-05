@@ -17,7 +17,8 @@
     <meta name="author" content="">
 
     <link rel="shortcut icon" href="Images/logo.ico" />
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -27,14 +28,17 @@
     <link type="text/css" rel="stylesheet" href="./css/555ea685977cdfae648b4567.css">
     <style type="text/css">
         .form-label-left{
-            width:150px !important;
+            width:151px !important;
         }
         .form-line{
             padding-top:12px;
             padding-bottom:12px;
         }
+        .form-radio-item{
+            width:110px;
+        }
         .form-label-right{
-            width:150px !important;
+            width:151px !important;
         }
         body, html{
             margin:0;
@@ -94,7 +98,7 @@
 
         .form-label-left,
         .form-label-right {
-            width: 150px
+            width: 151px
         }
 
         .form-all {
@@ -220,6 +224,7 @@
 
 
 
+
 <form method="POST" class="jotform-form" id="email_form_with_php" name="email_form_with_php" action="mailer/SendMail.php" accept-charset="utf-8" enctype="multipart/form-data">
 
     <!-- --------------------------------------1------------------------------------------------- -->
@@ -229,6 +234,7 @@
             <li class="form-input-wide" data-type="control_head">
                 <div class="form-header-group ">
                     <div class="header-text httal htvam">
+                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">About</button>
                         <center>
                             <h2 id="header_18" class="form-header" data-component="header">
                                 <img src="Images/logo.png" style="max-width: 100%; max-height: 100%;" >
@@ -277,7 +283,8 @@
         </span>
                 </label>
                 <div id="cid_22" class="form-input jf-required">
-                    <input type="file" id="" name="uploaded_file[]" required="" class="form-upload validate[upload]" data-imagevalidate="yes" data-file-accept="pdf, doc, docx, jpg, jpeg, png" data-file-maxsize="1024" data-file-minsize="0" data-file-limit="0" data-component="fileupload" multiple>
+                    <input type="file" id="uploaded_file" name="uploaded_file[]" required="" class="form-upload" accept=".pdf, .ppt, .pptx, .doc, .docx, .jpg, .jpeg, .png" data-file-maxsize="25000000" data-file-minsize="0" data-file-limit="0" data-component="fileupload" multiple>
+                    <label class="form-sub-label" for="uploaded_file" id="sublabel_first" style="min-height:13px;"> *Contact us for files larger than 25MB <button input="button" id="button">contact us</button></label>
                 </div>
             </li>
 
@@ -371,7 +378,7 @@
           <span class="form-radio-item">
           <span class="dragger-item">
           </span>
-            <input type="radio" class="form-radio" id="page_to_print_all" name="page_to_print" value="all" required>
+            <input type="radio" class="form-radio" id="page_to_print_all" name="page_to_print" value="all" required checked>
           <label id="label_page_to_print_all" for="page_to_print_all"> All </label>
           </span><br>
                         <span class="form-radio-item ">
@@ -395,7 +402,7 @@
                 </div>
             </li>
 
-            <li class="form-line" data-type="control_dropdown" id="id_23">
+            <!--<li class="form-line" data-type="control_dropdown" id="id_23">
                 <label class="form-label form-label-left form-label-auto" id="label_23" for="input_23"> Word document or Presentation
                     <span class="form-required">
         *
@@ -411,7 +418,7 @@
                         <option value="presentation">Presentation</option>
                     </select>
                 </div>
-            </li>
+            </li>-->
 
             <li class="form-line" data-type="control_dropdown" id="landscape_or_portrait_div">
                 <label class="form-label form-label-left form-label-auto" id="label_23" for="input_23"> Orientation
@@ -438,117 +445,128 @@
         *
       </span>
                 </label>
-                <div id="pages_per_sheet_ppt_landscape_div" class="form-input jf-required">
-                    <div class="form-multiple-column" data-columncount="3" data-component="radio">
+                <div id="pages_per_sheet_ppt_landscape_div" class="form-input jf-required" style="width:300px">
+                    <div class="form-multiple-column" data-columncount="3" data-component="radio" style="width:300px">
         <span class="form-radio-item ">
           <span class="dragger-item">
           </span>
             <input type="radio" class="form-radio" id="pages_per_sheet_pl1" name="pages_per_sheet" value="1_per_page_pl" required="" >
             <label id="label_pages_per_sheet_pl1" for="pages_per_sheet_pl1"> 1 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="105" width="150" data-component="image" src="Images/ppt/landscape/1_per_page_pl.png"><br>
-        </span><br>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="52" width="75" data-component="image" src="Images/landscape/1_per_page_pl.png">
+        </span>
+                    </div>
+                    <div class="form-multiple-column" data-columncount="3" data-component="radio" style="width:300px">
                         <span class="form-radio-item ">
           <span class="dragger-item">
           </span>
             <input type="radio" class="form-radio" id="pages_per_sheet_pl2" name="pages_per_sheet" value="2_per_page_pl" required="" >
             <label id="label_pages_per_sheet_pl2" for="pages_per_sheet_pl2"> 2 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="105" width="150" data-component="image" src="Images/ppt/landscape/2_per_page_pl.png"><br>
-        </span><br>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="52" width="75" data-component="image" src="Images/landscape/2_per_page_pl.png">
+        </span>
+                        <span class="form-radio-item ">
+          <span class="dragger-item">
+          </span>
+            <input type="radio" class="form-radio" id="pages_per_sheet_wl2" name="pages_per_sheet" value="2_per_page_wl" required="" >
+            <label id="label_pages_per_sheet_wl2" for="pages_per_sheet_wl2"> 2 per page </label>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:0px;" height="52" width="75" data-component="image" src="Images/landscape/2_per_page_wl.png">
+        </span>
+                    </div>
+                    <div class="form-multiple-column" data-columncount="3" data-component="radio" style="width:300px">
                         <span class="form-radio-item ">
           <span class="dragger-item">
           </span>
             <input type="radio" class="form-radio" id="pages_per_sheet_pl4" name="pages_per_sheet" value="4_per_page_pl" required="" >
             <label id="label_pages_per_sheet_pl4" for="pages_per_sheet_pl4"> 4 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="105" width="150" data-component="image" src="Images/ppt/landscape/4_per_page_pl.png"><br>
-        </span><br>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="52" width="75" data-component="image" src="Images/landscape/4_per_page_pl.png">
+        </span>
+                    </div>
+                    <div class="form-multiple-column" data-columncount="3" data-component="radio" style="width:300px">
                         <span class="form-radio-item ">
           <span class="dragger-item">
           </span>
             <input type="radio" class="form-radio" id="pages_per_sheet_pl6" name="pages_per_sheet" value="6_per_page_pl" required="" >
             <label id="label_pages_per_sheet_pl6" for="pages_per_sheet_pl6"> 6 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="105" width="150" data-component="image" src="Images/ppt/landscape/6_per_page_pl.png"><br>
-        </span><br>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="52" width="75" data-component="image" src="Images/landscape/6_per_page_pl.png">
+        </span>
+                    </div>
+                    <div class="form-multiple-column" data-columncount="3" data-component="radio" style="width:300px">
                         <span class="form-radio-item ">
           <span class="dragger-item">
           </span>
             <input type="radio" class="form-radio" id="pages_per_sheet_pl9" name="pages_per_sheet" value="9_per_page_pl" required="" >
             <label id="label_pages_per_sheet_pl9" for="pages_per_sheet_pl9"> 9 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="105" width="150" data-component="image" src="Images/ppt/landscape/9_per_page_pl.png"><br>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="52" width="75" data-component="image" src="Images/landscape/9_per_page_pl.png">
         </span>
+        
                     </div>
                 </div>
-                <div id="pages_per_sheet_ppt_portrait_div" class="form-input jf-required">
-                    <div class="form-multiple-column" data-columncount="3" data-component="radio">
-        <span class="form-radio-item ">
+                
+                <div id="pages_per_sheet_ppt_portrait_div" class="form-input jf-required" style="width:300px">
+                    <div class="form-multiple-column" data-columncount="3" data-component="radio" style="width:300px">
+        <!--<span class="form-radio-item ">
           <span class="dragger-item">
           </span>
             <input type="radio" class="form-radio" id="pages_per_sheet_pp1" name="pages_per_sheet" value="1_per_page_pp" required="" >
             <label id="label_pages_per_sheet_pp1" for="pages_per_sheet_pp1"> 1 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="150" width="105" data-component="image" src="Images/ppt/portrait/1_per_page_pp.png"><br>
-        </span><br>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="75" width="52" data-component="image" src="Images/portrait/1_per_page_pp.png">
+        </span>-->
+         <span class="form-radio-item ">
+          <span class="dragger-item">
+          </span>
+            <input type="radio" class="form-radio" id="pages_per_sheet_wp1" name="pages_per_sheet" value="1_per_page_wp" required="" >
+            <label id="label_pages_per_sheet_wp1" for="pages_per_sheet_wp1"> 1 per page </label>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:0px;" height="75" width="52" data-component="image" src="Images/portrait/1_per_page_wp.png">
+        </span>
+                        </div>
+                    <div class="form-multiple-column" data-columncount="3" data-component="radio" style="width:300px">
                         <span class="form-radio-item ">
           <span class="dragger-item">
           </span>
             <input type="radio" class="form-radio" id="pages_per_sheet_pp2" name="pages_per_sheet" value="2_per_page_pp" required="" >
             <label id="label_pages_per_sheet_pp2" for="pages_per_sheet_pp2"> 2 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="150" width="105" data-component="image" src="Images/ppt/portrait/2_per_page_pp.png"><br>
-        </span><br>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="75" width="52" data-component="image" src="Images/portrait/2_per_page_pp.png">
+        </span>
+                        </div>
+                    <div class="form-multiple-column" data-columncount="3" data-component="radio" style="width:300px">
                         <span class="form-radio-item ">
           <span class="dragger-item">
           </span>
             <input type="radio" class="form-radio" id="pages_per_sheet_pp4" name="pages_per_sheet" value="4_per_page_pp" required="" >
             <label id="label_pages_per_sheet_pp4" for="pages_per_sheet_pp4"> 4 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="150" width="105" data-component="image" src="Images/ppt/portrait/4_per_page_pp.png"><br>
-        </span><br>
-                        <span class="form-radio-item ">
-          <span class="dragger-item">
-          </span>
-            <input type="radio" class="form-radio" id="pages_per_sheet_pp6" name="pages_per_sheet" value="6_per_page_pp" required="" >
-            <label id="label_pages_per_sheet_pp6" for="pages_per_sheet_pp6"> 6 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="150" width="105" data-component="image" src="Images/ppt/portrait/6_per_page_pp.png"><br>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="75" width="52" data-component="image" src="Images/portrait/4_per_page_pp.png">
         </span>
-                    </div>
-                </div>
-                <div id="pages_per_sheet_word_landscape_div" class="form-input jf-required">
-                    <div class="form-multiple-column" data-columncount="3" data-component="radio">
-        <span class="form-radio-item ">
-          <span class="dragger-item">
-          </span>
-            <input type="radio" class="form-radio" id="pages_per_sheet_wl2" name="pages_per_sheet" value="2_per_page_wl" required="" >
-            <label id="label_pages_per_sheet_wl2" for="pages_per_sheet_wl2"> 2 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:0px;" height="105" width="150" data-component="image" src="Images/word/landscape/2_per_page_wl.png"><br>
-        </span><br>
-                    </div>
-                </div>
-                <div id="pages_per_sheet_word_portrait_div" class="form-input jf-required">
-                    <div class="form-multiple-column" data-columncount="3" data-component="radio">
-        <span class="form-radio-item ">
-          <span class="dragger-item">
-          </span>
-            <input type="radio" class="form-radio" id="pages_per_sheet_wp1" name="pages_per_sheet" value="1_per_page_wp" required="" >
-            <label id="label_pages_per_sheet_wp1" for="pages_per_sheet_wp1"> 1 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:0px;" height="150" width="105" data-component="image" src="Images/word/portrait/1_per_page_wp.png"><br>
-        </span><br>
                         <span class="form-radio-item ">
           <span class="dragger-item">
           </span>
             <input type="radio" class="form-radio" id="pages_per_sheet_wp4" name="pages_per_sheet" value="4_per_page_wp" required="" >
             <label id="label_pages_per_sheet_wp4" for="pages_per_sheet_wp4"> 4 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:0px;" height="150" width="105" data-component="image" src="Images/word/portrait/4_per_page_wp.png"><br>
-        </span><br>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:0px;" height="75" width="52" data-component="image" src="Images/portrait/4_per_page_wp.png">
+        </span>
+                    </div>
+                    <div class="form-multiple-column" data-columncount="3" data-component="radio" style="width:300px">
+                        <span class="form-radio-item ">
+          <span class="dragger-item">
+          </span>
+            <input type="radio" class="form-radio" id="pages_per_sheet_pp6" name="pages_per_sheet" value="6_per_page_pp" required="" >
+            <label id="label_pages_per_sheet_pp6" for="pages_per_sheet_pp6"> 6 per page </label>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:1px;" height="75" width="52" data-component="image" src="Images/portrait/6_per_page_pp.png">
+        </span>
+                        
                         <span class="form-radio-item ">
           <span class="dragger-item">
           </span>
             <input type="radio" class="form-radio" id="pages_per_sheet_wp6" name="pages_per_sheet" value="6_per_page_wp" required="" >
             <label id="label_pages_per_sheet_wp6" for="pages_per_sheet_wp6"> 6 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:0px;" height="150" width="105" data-component="image" src="Images/word/portrait/6_per_page_wp.png"><br>
-        </span><br>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:0px;" height="75" width="52" data-component="image" src="Images/portrait/6_per_page_wp.png">
+        </span>
+                        </div>
+                        <div class="form-multiple-column" data-columncount="3" data-component="radio" style="width:300px">
                         <span class="form-radio-item ">
           <span class="dragger-item">
           </span>
             <input type="radio" class="form-radio" id="pages_per_sheet_wp9" name="pages_per_sheet" value="9_per_page_wp" required="" >
             <label id="label_pages_per_sheet_wp9" for="pages_per_sheet_wp9"> 9 per page </label>
-            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:0px;" height="150" width="105" data-component="image" src="Images/word/portrait/9_per_page_wp.png"><br>
+            <img class="form-image" style="border-color:black; margin: 4% 2% 2% 17%; border:solid; border-width:0px;" height="75" width="52" data-component="image" src="Images/portrait/9_per_page_wp.png">
         </span>
                     </div>
                 </div>
@@ -557,10 +575,12 @@
             <li class="form-line" data-type="control_textarea" id="id_13">
                 <label class="form-label form-label-left form-label-auto" id="label_13" for="input_13"> Additional Information </label>
                 <div id="cid_13" class="form-input jf-required">
-                    <textarea id="additional_information" class="form-textarea" name="additional_information" cols="40" rows="6" data-component="textarea"></textarea>
+                    <textarea id="additional_information" class="form-textarea" name="additional_information" cols="40" rows="6" placeholder="Binding options are provided. Reffer the tables below." data-component="textarea"></textarea>
+                    <label class="form-sub-label" for="myModal" id="sublabel_first" style="min-height:13px;" type="button" class="btn btn-info btn-sm" data-toggle="modal" >* Currently all the orders will be printed at <button type="button" class="" data-toggle="modal" data-target="#myModal1">Global Asia Printers</button> infront of university of Moratuwa.</label>
+                    <label class="form-sub-label" for="myModal" id="sublabel_first" style="min-height:13px;" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">* 5% will be charged from each transaction as a service charge. Minimum charge will be Rs.5/= <button type="button" class="">About</button></label>
                 </div>
             </li>
-
+            
             <li class="form-line" data-type="control_button" id="id_2">
                 <div id="cid_2" class="form-input-wide">
                     <div style="margin-left:156px;" class="form-buttons-wrapper">
@@ -570,8 +590,85 @@
                     </div>
                 </div>
             </li>
-
-            <li class="form-input-wide" data-type="control_head" style="background-color: #d3d3d3;">
+            
+            <li class="form-line" data-type="control_button" id="id_245">
+                <div id="cid_2" class="form-input-wide" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">
+                    <div style="margin-left:156px;" class="form-buttons-wrapper">
+                        <label class="form-sub-label" for="id_245" id="sublabel_first1" style="min-height:13px;">Price table</label>
+                        <div class="table-responsive">          
+                            <table class="table table-bordered">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>A3</th>
+                                  <th>A4</th>
+                                  <th>A5</th>
+                                  <th>B4</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                    <td><b>Black & white</b></td>
+                                  <td>Rs.10</td>
+                                  <td>Rs.3</td>
+                                  <td>Rs.2</td>
+                                  <td>Rs.5</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Colour</b></td>
+                                  <td>Rs.40 - Rs.70</td>
+                                  <td>Rs.10 - Rs.40</td>
+                                  <td>Rs.5 - Rs.20</td>
+                                  <td>Rs.30 - Rs.60</td>
+                                  
+                                </tr>
+                              </tbody>
+                            </table>
+                            </div>
+                    </div>
+                </div>
+            </li>
+            <li class="form-line" data-type="control_button" id="id_2456">
+                <div id="cid_2" class="form-input-wide" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">
+                    <div style="margin-left:156px;" class="form-buttons-wrapper">
+                        <label class="form-sub-label" for="id_2456" id="sublabel_first1" style="min-height:13px;">Binding charges</label>
+                        <div class="table-responsive">          
+                            <table class="table table-bordered">
+                              <thead>
+                                <tr>
+                                  <th>Type</th>
+                                  <th>Cost</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Spiral Binding</td>
+                                  <td>Rs.60 - Rs.200</td>
+                                </tr>
+                                <tr>
+                                  <td>Velo Binding</td>
+                                  <td>Rs.120</td>
+                                </tr>
+                                <tr>
+                                    <td>Wire Binding</td>
+                                    <td>Rs.80 - Rs.250</td>
+                                </tr>
+                                <tr>
+                                  <td>Tape Binding</td>
+                                  <td>Rs.50 - Rs.100</td>
+                                </tr>
+                                <tr>
+                                  <td>Hard Binding</td>
+                                  <td>Rs.500 - Rs.1500</td>
+                                </tr>
+                              </tbody> 
+                            </table>
+                            </div>
+                    </div>
+                </div>
+            </li>
+            
+            <li class="form-input-wide" data-type="control_head" style="background-color: #d3d3d3;" id="contact_us">
                 <div class="form-header-group ">
                     <div class="header-text httal htvam">
                         <div
@@ -600,17 +697,96 @@
     </div>
 
     <!------------------------------------------------------------------------------------------->
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">About</h4>
+          </div>
+          <div class="modal-body">
+            <h4>
+                Get your PDF printed at the shop by submitting this form online.
+            </h4> 
+              <p>  
+                    Step 1: Fill this form.
+              </p>
+              <p>
+                    Step 2: We will call you soon for a confirmation.
+              </p>
+              <p>
+                    Step 3: We proceed your document to the print shop.
+              </p>
+              <p>
+                    Step 4: After the job is done(Within <b>2hrs max</b>). We will send you an SMS with the cost.
+              </p>
+              <p>
+                    Step 5: You will have to collect the document at <button type="button" class="" data-toggle="modal" data-target="#myModal1">Global Asia Printers</button>.
+            </p>
+            <p>* <b>5%</b> charge will be applied for the total cost for online service. Minimum charge will be Rs.5/=</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- Modal -->
+    <div id="myModal1" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Location to collect your documents</h4>
+          </div>
+          <div class="modal-body">
+            <h4>
+                Global Asia Printers & Book Binders
+            </h4> 
+            
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.61219670065478!2d79.90064084529877!3d6.794761983181008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe99a983ec5b8da7a!2sGlobal+Asia+Printers+%26+Book+Binders!5e0!3m2!1sen!2slk!4v1498327482785" width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe>
+              <br>
+              <img src="Images/global.png" width="100%" height="50%">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
 </form>
+<div id="gif" style="background-color: black; display: none; position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); width:100%; height: 100%;">
+    
+    <center><img width="300" height="300" style="" src="Images/loading.gif"></center>
+    <center><h2 style="color: white;">Uploading files...</h2></center>
+    <center><button class="btn btn-info" onclick="location.href = 'index.php';">cancel</button></center>
 
+</div>
+<div id="temp_msg" style="background-color: white; display: none; position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); width:100%; height: 100%;">
+    
+    <center><img width="600" height="400" style="" src="Images/please_wait.gif"></center>
+    <center><h2 style="color: black;">Our service is temperory unavailable! We will be back in 2hrs!</h2></center>
+
+</div>
 <script>
-
+    var enable = 1;
     $(document).ready(function initial(){
+        if (enable === 0){
+            $('#email_form_with_php').hide();
+            $("#temp_msg").show();
+        }
+        if($('#landscape_or_portrait').val() ===""){
 
-        if($('#word_or_presentation').val() ===""){
+            //$("#landscape_or_portrait_div").hide();
 
-            $("#landscape_or_portrait_div").hide();
-
-            $("#landscape_or_portrait").val("");
+            //$("#landscape_or_portrait").val("");
 
             $("#pages_per_sheet_div").hide();
 
@@ -619,25 +795,6 @@
         }
 
         else{
-
-            if($('#word_or_presentation').val() ===""){
-
-                $("#landscape_or_portrait_div").hide();
-
-                $("#landscape_or_portrait").val("");
-
-                $("#pages_per_sheet_div").hide();
-
-                $('input[name=pages_per_sheet]:checked').prop("checked", false);
-
-            }
-
-            else{
-
-                $("#landscape_or_portrait_div").show();
-
-            }
-
             if($('#landscape_or_portrait').val() ===""){
 
                 $("#pages_per_sheet_div").hide();
@@ -645,7 +802,6 @@
                 $('input[name=pages_per_sheet]:checked').prop("checked", false);
 
             }
-
             else{
 
                 if($('#landscape_or_portrait').val() ==="landscape"){
@@ -653,64 +809,22 @@
                     //$('input[name=pages_per_sheet]:checked').prop("checked", false);
 
                     $("#pages_per_sheet_div").show();
-
-                    if($('#word_or_presentation').val() ==="word"){
-
-                        $("#pages_per_sheet_word_landscape_div").show();
-
-                        $("#pages_per_sheet_word_portrait_div").hide();
-
-                        $("#pages_per_sheet_ppt_landscape_div").hide();
-
-                        $("#pages_per_sheet_ppt_portrait_div").hide();
-
-                    }
-
-                    else if($('#word_or_presentation').val() ==="presentation"){
-
-                        $("#pages_per_sheet_word_landscape_div").hide();
-
-                        $("#pages_per_sheet_word_portrait_div").hide();
+                    
 
                         $("#pages_per_sheet_ppt_landscape_div").show();
 
                         $("#pages_per_sheet_ppt_portrait_div").hide();
 
-                    }
-
-
-
                 }
-
                 else if($('#landscape_or_portrait').val() ==="portrait"){
 
                     //$('input[name=pages_per_sheet]:checked').prop("checked", false);
 
                     $("#pages_per_sheet_div").show();
 
-                    if($('#word_or_presentation').val() ==="word"){
-
-                        $("#pages_per_sheet_word_landscape_div").hide();
-
-                        $("#pages_per_sheet_word_portrait_div").show();
-
-                        $("#pages_per_sheet_ppt_landscape_div").hide();
-
-                        $("#pages_per_sheet_ppt_portrait_div").hide();
-
-                    }
-
-                    else if($('#word_or_presentation').val() ==="presentation"){
-
-                        $("#pages_per_sheet_word_landscape_div").hide();
-
-                        $("#pages_per_sheet_word_portrait_div").hide();
-
                         $("#pages_per_sheet_ppt_landscape_div").hide();
 
                         $("#pages_per_sheet_ppt_portrait_div").show();
-
-                    }
 
                 }
 
@@ -735,7 +849,48 @@
 
 
         });
+        
+        $('#uploaded_file:file').change(function(){
+            var fileSize = 0;//in bytes
+            var str = "";
+            for(i=0; i<$('#uploaded_file:file')[0].files.length; i++){
+                var file = $('#uploaded_file:file')[0].files[i];
+                fileSize += file.size;
+                var txt ="<button id=\""+file.name+"\" type=\"button\" class=\"btn btn-default added_files\" aria-label=\"Left Align\"><span style=\"color:green\" class=\"glyphicon glyphicon-ok-sign\" aria-hidden=\"true\"></span>"+file.name+"</button>";
+                str = str.concat(txt);
+            }
+            var maxSize = $('#uploaded_file:file').data('file-maxsize');
+            if(fileSize>maxSize){
+                var alert_txt = "<br><div class=\"alert alert-danger added_files\" role=\"alert\"><span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span><span class=\"sr-only\">Error:</span>File size exceed 25MB</div>";
+                str = alert_txt.concat(str);
+                str = str.replace(/green/g,"red");
+                str = str.replace(/glyphicon-ok-sign/g,"glyphicon-remove-sign");
+                $("#cid_22").append(str);
+                $('#uploaded_file:file').val("");
+                
+            }else{
+                $("#cid_22").append(str);
+                //alert('file size is correct- '+fileSize+' bytes');
+            }
+        
+        });
+        $('#uploaded_file:file').click(function(){
+                $(".added_files").remove();
+        });
 
+        /*$("#cid_22").on("click", ".added_files", function(e){
+            var file_to_remove = $(e.currentTarget).attr('id');
+            for(i=0; i<$('#uploaded_file:file')[0].files.length; i++){
+                var file = $('#uploaded_file:file')[0].files[i];
+                if(file_to_remove===file.name){
+                    $('#uploaded_file:file')[0].files[i].remove();
+                    //alert("File found!");
+                }
+            }
+            $(e.currentTarget).remove();   
+
+        });*/
+        
         $('#page_number_from').change(function(){
 
             if($('#page_number_from').val()<=0){
@@ -848,38 +1003,19 @@
 
         });
 
-        $("#landscape_or_portrait,#word_or_presentation").change(function(){
-
-            if($('#word_or_presentation').val() ===""){
-
-                $("#landscape_or_portrait_div").hide();
-
-                $("#landscape_or_portrait").val("");
-
-                $("#pages_per_sheet_div").hide();
-
-                $('input[name=pages_per_sheet]:checked').prop("checked", false);
-
-            }
-
-            else{
-
-                $("#landscape_or_portrait_div").show();
-
-            }
-
-            $('input[name=pages_per_sheet]:checked').prop("checked", false);
-
-            $("#pages_per_sheet_div").hide();
+        $("#landscape_or_portrait").change(function(){
 
             if($('#landscape_or_portrait').val() ===""){
 
+                //$("#landscape_or_portrait_div").hide();
+
+                //$("#landscape_or_portrait").val("");
+
                 $("#pages_per_sheet_div").hide();
 
                 $('input[name=pages_per_sheet]:checked').prop("checked", false);
 
             }
-
             else{
 
                 if($('#landscape_or_portrait').val() ==="landscape"){
@@ -888,31 +1024,9 @@
 
                     $("#pages_per_sheet_div").show();
 
-                    if($('#word_or_presentation').val() ==="word"){
-
-                        $("#pages_per_sheet_word_landscape_div").show();
-
-                        $("#pages_per_sheet_word_portrait_div").hide();
-
-                        $("#pages_per_sheet_ppt_landscape_div").hide();
-
-                        $("#pages_per_sheet_ppt_portrait_div").hide();
-
-                    }
-
-                    else if($('#word_or_presentation').val() ==="presentation"){
-
-                        $("#pages_per_sheet_word_landscape_div").hide();
-
-                        $("#pages_per_sheet_word_portrait_div").hide();
-
                         $("#pages_per_sheet_ppt_landscape_div").show();
 
                         $("#pages_per_sheet_ppt_portrait_div").hide();
-
-                    }
-
-
 
                 }
 
@@ -922,34 +1036,26 @@
 
                     $("#pages_per_sheet_div").show();
 
-                    if($('#word_or_presentation').val() ==="word"){
-
-                        $("#pages_per_sheet_word_landscape_div").hide();
-
-                        $("#pages_per_sheet_word_portrait_div").show();
-
-                        $("#pages_per_sheet_ppt_landscape_div").hide();
-
-                        $("#pages_per_sheet_ppt_portrait_div").hide();
-
-                    }
-
-                    else if($('#word_or_presentation').val() ==="presentation"){
-
-                        $("#pages_per_sheet_word_landscape_div").hide();
-
-                        $("#pages_per_sheet_word_portrait_div").hide();
-
                         $("#pages_per_sheet_ppt_landscape_div").hide();
 
                         $("#pages_per_sheet_ppt_portrait_div").show();
-
-                    }
 
                 }
 
             }
 
+        });
+        
+        $('#email_form_with_php').submit(function(){
+            $("#email_form_with_php").hide();
+            //$("#input_1").hide();
+            $("#gif").show();
+        });
+        
+        $("#button").click(function() {
+            $('html, body').animate({
+                scrollTop: $("#contact_us").offset().top
+            }, 2000);
         });
 
     });
@@ -957,6 +1063,7 @@
 </script>
 
 <script>
+    
     function logOrderSubmittedEvent() {
         try {
             var colort = document.getElementById('input_19_1').value;
@@ -983,6 +1090,6 @@
 </script>
 <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5946b702de4fd400123e25c9&product=sticky-share-buttons"></script>
 
-
 </body>
+
 </html>

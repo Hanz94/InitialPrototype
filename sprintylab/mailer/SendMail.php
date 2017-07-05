@@ -39,17 +39,18 @@ function send_attachment($file, $file_is_order = true)
            , $order_id, $total_files, $order_time;
 
     $sent = 'No';
-    $subject = '[SPRINTY] New ' . ($file_is_order ? 'Order:' : 'log report:') . date_stamp();
     //$body = 'New Order File' . "\n" . ' - ' . $file . "\n\n";
 
     $email = new PHPMailer();
     $email->From = $from . '@' . $website;
     $email->FromName = $from;
-    $email->Subject = $subject;
     //$email->Body = $body;
     $email->MsgHTML(getEmailHTML());
     $email->AddAddress($send_to);
     $email->AddAddress('sprintylab@gmail.com');
+
+    $subject = '[SPRINTY] ' . ($file_is_order ? 'Order: ' : 'log report:') . str_pad($order_id, 4, '0', STR_PAD_LEFT);
+    $email->Subject = $subject;
 
 
     for($i=0; $i<$total_files; $i++) {
@@ -62,10 +63,12 @@ function send_attachment($file, $file_is_order = true)
         //echo ($file_is_order ? 'New Order' : 'Log Report') . ' sent to ' . $send_to . '.<br />';
 
         $twitter = new Twitter($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
-        $tweet = "New Order:\nFrom ".$_POST['name']."\nOrder ID: ".str_pad($order_id, 4, '0', STR_PAD_LEFT)."\n".$order_time;
+        $tweet = "New Order:\nFrom ".$_POST['name']."\nOrder ID: ".str_pad($order_id, 4, '0', STR_PAD_LEFT)."\n".$order_time."\nPlease check your emails\n-SprintyLab-";
+        $tweetCustomer = "Hi ".$_POST['name'].",\nOrder ID: ".str_pad($order_id, 4, '0', STR_PAD_LEFT)."\nReply YES to confirm your order\n-SprintyLab-"."\n".$_POST['mobile'];
         try {
             if ($twitter->authenticate()) {
                 $twitter->send(utf8_encode($tweet));
+                $twitter->send(utf8_encode($tweetCustomer));
             }
         } catch (TwitterException $ex){
 
@@ -144,7 +147,7 @@ function write_log()
         } else {
             //echo 'yes<br />' . "\n";
         }
-        unset($_POST);
+        unset($_POST['submit']);
         echo getSuccessResponse();
     }
 
