@@ -1,0 +1,617 @@
+/*-------------- Color Settings CSS -------------*/
+.page-style2 #header.fixed-header{
+	background-color: #5a5a5a
+}
+.page-style2 .nav.navbar-nav::after {
+    border-right: 40px solid #308f4b
+}
+.page-style2 .fixed-header .nav.navbar-nav::before{
+	background-color: #308f4b
+}
+.get_quote .btn-secondary {
+	background-color: #000;
+	border: 2px solid #000
+}
+.get_quote .btn-secondary:hover {
+	background: transparent;
+	border: 2px solid #000;
+	color: #000
+}
+.btn-primary {
+	border-color: #308f4b;
+	background-color: #308f4b
+}
+.btn-primary:focus, 
+.btn-primary.focus, 
+.btn-primary:hover {
+	color: #308f4b;
+	border-color: #308f4b
+}
+h1, h2, h3, h4, h5, h6 {
+	color: #1a1a1a
+}
+.pagination > .active > a, 
+.pagination > .active > span, 
+.pagination > .active > a:hover, 
+.pagination > .active > span:hover, 
+.pagination > .active > a:focus, 
+.pagination > .active > span:focus {
+	border-color: #308f4b;
+	background-color: #308f4b
+}
+#header_top ul li i {
+	color: #308f4b
+}
+.text-area ul li i {
+	color: #308f4b
+}
+.banner_title {
+	color: #308f4b
+}
+.open > .dropdown-toggle.btn-primary {
+	color: #308f4b
+}
+.yellow_font {
+	color: #308f4b
+}
+.read_more2_btn {
+	color: #1a1a1a
+}
+#our_srvice2 .service_part h5 a {
+  color: #1a1a1a;
+}
+#our_srvice2 .service_part:hover h5 a{
+	color: #308f4b
+}
+#our_srvice2 .service_part:hover .read_more2_btn {
+	color: #308f4b
+}
+.btn-primary:active, 
+.btn-primary.active {
+	color: #308f4b
+}
+.btn-secondary:hover{
+	color: #1a1a1a
+}
+.social_media a.active, 
+.social_media a:hover {
+	color: #308f4b
+}
+.achievement h6 {
+	color: #fff
+}
+.year {
+	color: #308f4b
+}
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a,  
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,  
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+	color: #308f4b
+}
+.pagination > li > a:hover, 
+.pagination > li > span:hover, 
+.pagination > li > a:focus, 
+.pagination > li > span:focus{
+	background-color: #308f4b
+} 
+.carousel-indicators .active,
+#slider2 .carousel-indicators li.active{
+	background-color: #308f4b
+}
+.section_title_1:before, 
+.section_title_1:after {
+	background: #308f4b
+} 
+.slider_caption h1:before {
+	background: #308f4b
+} 
+#our_srvice {
+	background: #f1f1f1
+}
+.default-portfolio-item .overlay-box {
+	background: #308f4b
+}
+.service_part::before {
+	background: #308f4b
+}
+.section_sub_title p {
+	color: #1a1a1a
+} 
+.navbar-default .navbar-nav > li > a {
+	color: #1a1a1a
+} 
+.gallery-section .filter-btns li {
+	color: #1a1a1a
+} 
+.error_content h4 {
+	color: #1a1a1a
+}
+.down_line_yellow:before {
+	background: #308f4b
+} 
+.navbar-default .navbar-nav > .active > a:before, 
+.navbar-default .navbar-nav > .active > a:after {
+	background: #308f4b
+}
+.down_line_black:before {
+	background: #1a1a1a
+} 
+.year{
+	background: #1a1a1a
+}
+#header_top {
+	background: #1a1a1a
+} 
+.small_img .small_img_overlay {
+	background: #1a1a1a
+} 
+.choose_reason_icon  {
+	background: #000
+}
+.service_left .service_icon,
+.service_right .service_icon {
+	border-color: #f1f1f1
+}
+.choose_reason_icon {
+	border-color: #000
+}
+.contact_icon {
+	border-color: #308f4b
+}
+.apartment:hover h5, 
+.office:hover h5, 
+.move_in_out:hover h5, 
+.car_washing:hover h5, 
+.renovation:hover h5, 
+.green_cleaning:hover h5 {
+	color: #308f4b;
+}
+
+/*---------Service Icons ------------*/
+.apartment .service_icon {
+	background: #1a1a1a url("../images/icon/DOCUMENTS.png") no-repeat center / 30% 30%;
+}
+.apartment:hover .service_icon {
+	background: #308f4b url("../images/icon/DOCUMENTS.png") no-repeat center / 30% 30%;
+}
+.office .service_icon {
+	background: #1a1a1a url("../images/icon/thesis.png") no-repeat center / 30% 30%;
+}
+.office:hover .service_icon {
+	background: #308f4b url("../images/icon/thesis.png") no-repeat center / 30% 30%;
+}
+.move_in_out .service_icon {
+	background: #1a1a1a url("../images/icon/mug.png") no-repeat center / 40% 40%;
+}
+.move_in_out:hover .service_icon {
+	background: #308f4b url("../images/icon/mug.png") no-repeat center / 40% 40%;
+}
+.car_washing .service_icon {
+	background: #1a1a1a url("../images/icon/t-shirt.png") no-repeat center / 30% 30%;
+}
+.car_washing:hover .service_icon {
+	background: #308f4b url("../images/icon/t-shirt.png") no-repeat center / 30% 30%;
+}
+.renovation .service_icon {
+	background: #1a1a1a url("../images/icon/white_paintbrush.png") no-repeat center / 30% 30%;
+}
+.renovation:hover .service_icon {
+	background: #308f4b url("../images/icon/white_paintbrush.png") no-repeat center / 30% 30%;
+}
+.green_cleaning .service_icon {
+	background: #1a1a1a url("../images/icon/white_leaf.png") no-repeat center / 40% 40%;
+}
+.green_cleaning:hover .service_icon {
+	background: #308f4b url("../images/icon/white_leaf.png") no-repeat center / 40% 40%;
+}
+.service_middle {
+	border-color: #1a1a1a
+} 
+.download a:hover, 
+.download a:focus {
+	border-color: #1a1a1a
+}
+.download2 a:hover, 
+.download2 a:focus {
+	border-color: #1a1a1a
+}
+.gallery-section .filter-btns li:hover, 
+.gallery-section .filter-btns li.active {
+	color: #308f4b
+}
+.gallery-section .filter-btns li.active{
+	color: #308f4b;
+	border-color: #308f4b
+}
+.my_btn2 {
+	color: #f7465b;
+	border-color: #f7465b
+}
+.my_btn2:hover {
+	background: #f7465b;
+	color: #fff
+}
+.pagination > li > a, 
+.pagination > li > span {
+	background-color: #f5f5f5;
+}
+#quote_testmonial {
+	background: #ebebeb
+} 
+#company_video {
+	background: #f5f5f5
+}
+#partners {
+	background: #f5f5f5
+}
+.other_service {
+	background: #f5f5f5
+}
+.brochure_details {
+	background: #f5f5f5
+} 
+.information {
+	background: #f5f5f5
+}
+.search_box {
+	background: #f5f5f5
+}
+.single_category {
+	background: #f5f5f5
+}
+.comment_name {
+	background: #f5f5f5
+}
+.comment_email {
+	background: #f5f5f5
+}
+.comment_url {
+	background: #f5f5f5
+}
+.comment_message  {
+	background: #f5f5f5
+}
+.quote {
+	background: #308f4b
+}
+.get_quote select option {
+	background: #308f4b
+}
+.blog_post:hover .blog_date {
+	background: #308f4b
+}
+.save_money {
+	background: #308f4b
+}
+.according_title.active {
+	background: #308f4b
+} 
+#get_quote_banner {
+	background: #308f4b
+}
+.member_img_hover {
+	background: #308f4b
+}
+.download a, 
+.download2 a {
+	background: #308f4b
+}
+.other_service:hover, 
+.other_service.active {
+	background: #308f4b
+}
+.single_category:hover {
+	background: #308f4b
+}
+.single_comment:hover h6 a {
+	color: #308f4b
+}
+.photo_gallery a:hover:before {
+	background: #308f4b
+} 
+.single_blog_date {
+	background: #308f4b
+} 
+#message_location {
+	background: #308f4b
+} 
+.newsletter_form input[type="submit"] {
+	background: #308f4b
+}
+.quote h3 {
+	color: #1a1a1a
+} 
+.testmonial h3 {
+	color: #1a1a1a
+} 
+.quote p {
+	color: #1a1a1a
+}
+.blog_title a {
+	color: #1a1a1a
+}
+.quote_text p strong {
+	color: #1a1a1a
+} 
+.member_img_hover .social_media a:hover {
+	color: #1a1a1a
+}
+h4.member_name a {
+	color: #1a1a1a
+} 
+.service_part:hover h5 a {
+	color: #1a1a1a
+} 
+.service_part:hover .read_more2_btn {
+	color: #1a1a1a
+} 
+.project-thumbnail a.onlive::after {
+	color: #1a1a1a
+}
+.information_table li b {
+	color: #1a1a1a
+} 
+.blog_right_sidebar h5 {
+	color: #1a1a1a
+}
+.single_category span {
+	color: #1a1a1a
+}
+.single_recent_post h6 a, 
+.single_comment h6 a {
+	color: #1a1a1a
+}
+blockquote p {
+	color: #1a1a1a
+}
+.post_social_media a {
+	color: #1a1a1a
+} 
+.message p, 
+.message h3 {
+	color: #1a1a1a
+} 
+.error_content h5 {
+	color: #1a1a1a
+} 
+.dropdown-menu > li > a {
+	color: #1a1a1a
+}
+.page-style2 .dropdown-menu > li > a {
+	color: #fff
+} 
+.pagination > li > a, 
+.pagination > li > span {
+	color: #818181
+}
+.testimonials .owl-theme .owl-dots .owl-dot span, 
+.side_testimonial_part .owl-theme .owl-dots .owl-dot span{
+	background: #1a1a1a
+}
+.testimonials .owl-theme .owl-dots .owl-dot.active span, 
+.side_testimonial_part .owl-theme .owl-dots .owl-dot.active span{
+	background: #308f4b;
+}
+.blog_date {
+	background: #1a1a1a
+} 
+.according_title {
+	background: #1a1a1a
+} 
+.download a:hover, 
+.download a:focus {
+	background: #1a1a1a
+} 
+.download2 a:hover, 
+.download2 a:focus {
+	background: #1a1a1a
+} 
+.contact_icon {
+	background: #1a1a1a
+} 
+.footer_top {
+	background: #1a1a1a
+}
+.copyright {
+	background: #1a1a1a
+}
+.post_admin a {
+	color: #308f4b
+}
+.blog_post:hover .blog_title a {
+	color: #308f4b
+}
+.blog_post:hover .read_more_btn {
+	color: #308f4b
+} 
+.according_details a {
+	color: #308f4b
+}
+.team_member:hover .member_name a {
+	color: #308f4b
+} 
+.service_part h5 a {
+	color: #1a1a1a
+}
+.service_part button.blank_btn a {
+	color: #308f4b
+} 
+.feedback-sidebar .user h6 {
+	color: #308f4b
+} 
+.text-box ul li i {
+	color: #308f4b
+} 
+.single_recent_post h6 a:hover {
+	color: #308f4b
+} 
+.single_comment p a {
+	color: #308f4b
+}
+.archive_post a:hover {
+	color: #308f4b
+}
+.single_post_admin a {
+	color: #308f4b
+} 
+.tag a:hover {
+	color: #308f4b
+}
+.tag span {
+	color: #308f4b
+}
+.post_social_media a:hover {
+	color: #308f4b
+}
+.replay {
+	color: #308f4b
+}
+.error_content h1 {
+	color: #308f4b
+}
+.quick_link ul li a:hover {
+	color: #308f4b
+}
+.touch li h6 i {
+	color: #308f4b
+}
+.blog_post:hover {
+	border-color: #308f4b
+}
+.year {
+	border-color: #308f4b
+}
+.single_partner:hover {
+	border-color: #308f4b
+}
+.project-thumbnail a.onlive::after {
+	border-color: #308f4b
+}
+.download a, 
+.download2 a {
+	border-color: #308f4b	
+}
+.service_part{
+	background: #f5f5f5;
+}
+
+.side_testimonial_part{
+	border-color: #ebeae4
+}
+.single_blog_details {
+	border-bottom-color: #f5f5f5
+}
+.all_comment{
+	border-bottom-color: #f5f5f5
+}
+.offer{
+	background: #26b54e;
+}
+.objection {
+    background: #2ea550;
+}
+#single_project .service-slider .owl-controls .owl-prev:hover{
+	background: #308f4b url(../images/icon/white_left_arrow.png) no-repeat;
+	background-position: center center;
+	background-size: 20px
+}
+#single_project .service-slider .owl-controls .owl-next:hover{
+	background: #308f4b url(../images/icon/white_right_arrow.png) no-repeat;
+	background-position: center center;
+	background-size: 20px
+}
+.dropdown-menu > li > a:hover, 
+.dropdown-menu > li > a:focus{
+	background-color: #f5f5f5
+}
+.page-style2 .dropdown-menu > li > a:hover, 
+.page-style2 .dropdown-menu > li > a:focus{
+	background-color: #308f4b;
+	color: #000
+}
+.dropdown-menu > .active > a, 
+.dropdown-menu > .active > a:hover, 
+.dropdown-menu > .active > a:focus{
+	background-color: transparent;
+	color: #fff
+}
+.page-style2 .dropdown-menu > .active > a, 
+.page-style2 .dropdown-menu > .active > a:hover, 
+.page-style2 .dropdown-menu > .active > a:focus{
+	background-color: transparent;
+	color: #308f4b
+}
+.navbar-nav > li:hover > a{
+	color: #308f4b
+}
+.page-style2 .navbar-nav > li:hover > a{
+	color: #fff
+}
+/*-------------- Service Page Icond --------------*/
+
+.home_service .service_icon {
+	background: #1a1a1a url(../images/icon/home.png) no-repeat center center;
+	background-size: 40px 40px
+}
+.home_service:hover .service_icon {
+	background: #1a1a1a url(../images/icon/home.png) no-repeat center center;
+	background-size: 40px 40px
+}
+.car_service .service_icon {
+	background: #1a1a1a url(../images/icon/white_car.png) no-repeat center center;
+	background-size: 40px 40px
+}
+.car_service:hover .service_icon {
+	background: #1a1a1a url(../images/icon/white_car.png) no-repeat center center;
+	background-size: 40px 40px
+}
+.office_service .service_icon {
+	background: #1a1a1a url(../images/icon/office.png) no-repeat center center;
+	background-size: 40px 40px
+}
+.office_service:hover .service_icon {
+	background: #1a1a1a url(../images/icon/office.png) no-repeat center center;
+	background-size: 40px 40px
+}
+.renovation_service .service_icon {
+	background: #1a1a1a url(../images/icon/white_paintbrush.png) no-repeat center center;
+	background-size: 40px 40px
+}
+.renovation_service:hover .service_icon {
+	background: #1a1a1a url(../images/icon/white_paintbrush.png) no-repeat center center;
+	background-size: 40px 40px
+}
+.in_out_service .service_icon {
+	background: #1a1a1a url(../images/icon/express.png) no-repeat center center;
+	background-size: 40px 40px
+}
+.in_out_service:hover .service_icon {
+	background: #1a1a1a url(../images/icon/express.png) no-repeat center center;
+	background-size: 40px 40px
+}
+.green_service .service_icon {
+	background: #1a1a1a url(../images/icon/white-tree-leaf.png) no-repeat center center;
+	background-size: 40px 40px
+}
+.green_service:hover .service_icon {
+	background: #1a1a1a url(../images/icon/white-tree-leaf.png) no-repeat center center;
+	background-size: 40px 40px
+}
+
+@media (min-width: 992px){
+.nav .dropdown-menu{
+	background: #308f4b
+}
+.page-style2 .nav .dropdown-menu{
+	background: #000
+}
+}
+@media (max-width: 991px){
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus, 
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,  
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+	color: #308f4b
+}
+}

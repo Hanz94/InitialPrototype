@@ -1,0 +1,422 @@
+
+/*============ Custom Media Responsive CSS ============*/
+@media screen and (max-width:1200px){
+	.service_right h5{
+		margin-left: 20px
+	}
+	.service_left h5{
+		margin-right: 20px
+	}
+	#slider .carousel-caption h1{
+		font-size: 300%
+	}
+	.blog_info{
+		padding: 0 15px
+	}
+	.offer, .objection, .save_money {
+	  padding: 70px 30px
+	}
+	#partners .owl-controls{
+		display: none
+	}
+	.choose_us_right {
+	  right: -8%;
+	  width: 50%;
+	}
+	.member_img_hover{
+		padding: 50px 30px
+	}
+	.member_img_hover h4 {
+	  font-size: 16px
+	}
+	.download2 a{
+		padding: 0 15px
+	}
+}
+
+@media screen and (min-width:992px){
+	.nav .dropdown-menu{
+		visibility: hidden;
+		display: block;
+		top: 110%;
+		opacity: 0;
+	}
+	.nav .dropdown:hover ul.dropdown-menu {
+		top: 100%;
+		visibility: visible;
+		opacity: 1;
+		-moz-transition: all 0.2s ease;
+		-webkit-transition: all 0.2s ease;
+		-ms-transition: all 0.2s ease;
+		-o-transition: all 0.2s ease;
+		transition: all 0.2s ease
+	}
+}
+
+@media screen and (max-width:991px){
+	.navbar-default .navbar-nav > li {
+	  padding: 0 20px;
+	}
+	.service_sidebar{
+		margin-top: 50px
+	}
+	.message {
+	  padding: 50px 30px 30px;
+	}
+	#map {
+	  height: 350px;
+	}
+	.contact_info {
+	  padding: 15px 0;
+	}
+	.member_img_hover{
+		padding: 60px 50px
+	}
+	.section_sub_title{
+		width:100%
+	}
+	#header_top{
+		display: none
+	}
+	.navbar-brand > img {
+		display: block;
+		left: 0;
+		position: relative;
+		top: 8px;
+		width: 100px;
+		z-index: 99;
+	}
+	.navigation {
+	  padding: 5px 0
+	}
+
+	.navigation .nav.navbar-nav {
+		float: none
+	}
+	.dropdown-menu{
+		position: static;
+		width: 100%;
+		padding: 0 
+	}
+	.navbar-default .navbar-nav > li > a, .navbar-nav .dropdown-menu > li > a{
+		line-height: 40px
+	}
+	.about_us_left {
+	  margin: 0 auto;
+	  width: 70%
+	}
+	.service_middle {
+		border: none
+	}
+	.service_middle img{
+		display: none
+	}
+	.service_left, .service_right{
+		width:48%
+	}
+	.office , .renovation{
+	  padding: 0
+	}
+	.section_sub_title p{
+		width: 90%
+	}
+	.choose_us_right{
+		display: none
+	}
+	.blog_post, .quick_link h4, .touch h4, .business_hour h4, .com_info a{
+		margin-bottom: 30px
+	}
+	#slider .carousel-caption p{
+		width: 85%;
+		margin: 20px 0
+	}
+	.footer_bottom_right {
+	  display: inline-table;
+	  float: right;
+	  width: inherit
+	}
+	.follow{
+		margin-bottom: 25px
+	}
+	.newsletter, .footer_bottom_left{
+		margin-top: 0
+	}
+	.offer, .objection, .save_money{
+		min-height: auto;
+		height: auto
+	}
+	.video_right{
+		height: 450px
+	}
+	.our_history_right{
+		display: none
+	}
+	.video_area{
+		padding-top: 30px
+	}
+	.quote_text p{
+		text-align: center
+	}
+	.banner-btn {
+	  display: table;
+	  margin: 0 auto;
+	  padding-top: 30px;
+	  position: static;
+	  transform: none
+	}
+	.blog_right_sidebar{
+		margin-top: 50px
+	}
+	.post_social_media {
+		float: left;
+		margin-top: 30px;
+		width: 100%
+	}
+	.gallery-section .filter-btns li{
+		margin:5px 15px
+	}
+	.offer, .objection, .save_money {
+		padding: 50px 30px;
+	}.fixed-header .navigation {
+		padding: 0
+	}
+	.fixed-header .navbar-brand > img {
+		top: 8px;
+		width: 90px
+	}
+	#slider, #page_banner {
+		margin-top: 66px
+	}
+	.navbar-brand::after {
+		display: none
+	}
+	.banner_overlay {
+		padding: 50px 0;
+	}
+}
+
+@media screen and (max-width:767px){
+#slider .carousel-caption p {
+	width: 100%;
+}
+.company_details{
+	padding-top: 30px
+}
+.section_sub_title{
+	width:100%
+}
+.about_us_left {
+	margin: 0 auto;
+	width: 100%
+}
+.service_left, .service_right {
+	position: static;
+	width: 100%;
+	padding-left: 15px;
+	padding-right: 15px
+}
+.service_middle {
+	display: none
+}
+.apartment, .office, .move_in_out{
+	width: 100%;
+	float: none
+}
+.service_content a{
+	display: inline-block;
+	width: 100%
+}
+.big_img{
+	width: 100%;
+	height: 100%
+}
+.service_left .service_icon {
+  float: none;
+  margin: 0 auto
+}
+.service_left h5{
+	margin-right: 0;
+	margin-top: 20px;
+	text-align: center;
+	width: 100%
+}
+.car_washing, .renovation, .green_cleaning {
+  float: none;
+  width: 100%
+}
+.service_right .service_icon {
+  float: none;
+  margin: 0 auto
+}
+.service_right h5{
+	margin-left: 0;
+	margin-top: 20px;
+	text-align: center;
+	width: 100%
+}
+.achievement{
+	padding: 30px 0
+}
+.queto-image{
+	display:none
+}
+.quote, .testimonials {
+	padding: 50px 15px
+}
+.follow, .newsletter{
+	width: 100%
+}
+.footer_bottom_left{
+	margin-bottom: 30px
+}
+#slider .carousel-inner > .item > img, #slider .carousel-inner > .item > a > img{
+	height: 90vh;
+	width: auto
+}
+.member_img_hover{
+	padding:60px 50px
+}
+.yearly_history{
+	padding-left: 90px
+}
+.year {
+	border: 5px solid #f8b604;
+	height: 70px;
+	width: 70px;
+}
+.pagination > li:first-child > a, .pagination > li:last-child > a{
+	text-indent: -9999px;
+    padding: 12px 7px;
+    width: auto;
+	line-height: initial;
+}
+.pagination li:first-child a span{
+	background: url(../images/icon/black_left_arrow.png) no-repeat;
+	background-position: center center;
+	background-size: 20px;
+	width: 30px;
+	display: table
+}
+.pagination li:last-child a span{
+	background: url(../images/icon/black_right_arrow.png) no-repeat;
+	background-position: center center;
+	background-size: 20px;
+	width: 30px;
+	display: table
+}
+.pagination > li > span{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.pagination > li > a, .pagination > li > span{
+	width: 40px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    padding: 0
+}
+.single_blog_date{
+	top: 15px;
+	left: 15px
+}
+.openion {
+	padding-left: 20px
+}
+
+.reply_comment {
+  margin-left: 30px
+}
+#slider .carousel-caption h1 {
+    font-size: 150%;
+}
+.slider_caption h1::before{
+	width: 60px
+}
+.banner_overlay {
+    padding: 30px 0;
+}
+.banner_overlay h2 {
+    padding-bottom: 10px;
+	font-size: 21px;
+}
+.text-area ul li{
+	width: 100%
+}
+.quote_text p{
+	font-size: 16px
+}
+blockquote {
+    padding-left: 20px;
+}
+.message {
+    padding: 50px 15px 30px;
+}
+.contact_message label {
+    bottom: -20px;
+    font-size: 12px
+}
+/*-------- Media query for Mobile Portrait View -----------*/
+@media screen and (orientation:portrait) { 
+	.video_right {
+	  height: 220px
+	}
+	.btn{
+		padding: 0 20px
+	}
+	.small_img{
+		width: 150px;
+		height: 150px
+	}
+	.gallery-section .column {
+		margin-bottom: 15px;
+	}
+	.pagination > li > a, .pagination > li > span{
+		margin-left: 5px
+	}
+}
+/*---------------------------------------------------------*/
+	
+}
+
+
+
+/*------------ Media Query for mobile landscape Screen -----------*/
+@media screen and (max-width: 767px) and (min-width: 360px){
+	 @media screen and (orientation:landscape) { 
+		.big_img {
+			width: 70%;
+			height: auto;
+			margin: 0 auto
+		}
+		.small_img{
+			right: 100px
+		}
+		.service_left > div, .service_right > div{
+			width: 50%;
+			float: left;
+			padding-left: 15px;
+			padding-right: 15px
+		}
+		.filter-list {
+			display: inline-block;
+			margin-left: -7.5px;
+			margin-right: -7.5px
+		}
+		.filter-list div.col-sm-6 {
+			width: 50%;
+			float: left;
+			padding: 0 7.5px;
+			margin-bottom: 15px
+		}
+		.carousel-caption{
+			top: 45%
+		}
+		#slider .carousel-inner > .item > img, 
+		#slider .carousel-inner > .item > a > img {
+			height: 130vh
+		}
+		.photo_gallery a{
+			width: 22%
+		}
+	 }
+}
